@@ -1,3 +1,5 @@
 #! /bin/bash
 
-gcc hello.c greeting.c -o hello
+gcc -c hello.c
+gcc -c greeting.c
+gcc hello.o greeting.o -o hello
