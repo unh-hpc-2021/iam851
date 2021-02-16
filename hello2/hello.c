@@ -17,7 +17,7 @@ int factorial(int n)
 int
 main(int argc, char **argv)
 {
-  greeting();
+  greeting("everyone");
 
   printf("10 factorial is %d\n", factorial(10));
 }

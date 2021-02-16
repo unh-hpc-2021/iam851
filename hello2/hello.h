@@ -2,6 +2,6 @@
 #ifndef HELLO_H
 #define HELLO_H
 
-void greeting(void);
+void greeting(const char *name);
 
 #endif
