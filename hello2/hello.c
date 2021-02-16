@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void greeting(void);
+
 int factorial(int n)
 {
   int i;
