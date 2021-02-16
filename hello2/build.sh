@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -x
+
 gcc -Wall -c hello.c
 gcc -Wall -c greeting.c
 gcc -Wall -c factorial.c
