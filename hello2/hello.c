@@ -1,6 +1,6 @@
-#include <stdio.h>
 
-void greeting(void);
+#include "hello.h"
+#include <stdio.h>
 
 int factorial(int n)
 {
