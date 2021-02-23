@@ -70,4 +70,5 @@ Moved it into `factorial.cxx`, added it to the header `hello.h` and to the build
 
 I replaced the `build.sh` by a basic Makefile, just like we did for C.
 
+I then followed the steps laid out in Class 4 to use variables, rules, etc -- the steps can be seen in detail in the commit history.
 

@@ -2,14 +2,14 @@ CXX = g++
 CXXFLAGS = -Wall
 
 hello: hello.o greeting.o factorial.o
-	$(CXX) hello.o greeting.o factorial.o -o hello
+	$(CXX) $^ -o $@
 
 hello.o: hello.cxx
-	$(CXX) $(CXXFLAGS) -c hello.cxx
+	$(CXX) $(CXXFLAGS) -c $<
 
 greeting.o: greeting.cxx
-	$(CXX) $(CXXFLAGS) -c greeting.cxx
+	$(CXX) $(CXXFLAGS) -c $<
 
 factorial.o: factorial.cxx
-	$(CXX) $(CXXFLAGS) -c factorial.cxx
+	$(CXX) $(CXXFLAGS) -c $<
 
