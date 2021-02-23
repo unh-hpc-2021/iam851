@@ -72,3 +72,5 @@ I replaced the `build.sh` by a basic Makefile, just like we did for C.
 
 I then followed the steps laid out in Class 4 to use variables, rules, etc -- the steps can be seen in detail in the commit history.
 
+The last step, using built-in rules, didn't work. The built-in rule for linking uses the C compiler, which causes trouble with C++ code, and there is no built-in rule for .cxx
+
