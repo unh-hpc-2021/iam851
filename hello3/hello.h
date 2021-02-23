@@ -3,6 +3,7 @@
 
 #include <string>
 
+int factorial(int);
 void greeting(std::string name);
 
 #endif

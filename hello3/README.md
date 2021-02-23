@@ -62,3 +62,7 @@ After the header consistent, everything works again.
 
 Finally, I went and used the C++ `std::string` instead of `const char *`.
 
+### Separate out `factorial()` function
+
+Moved it into `factorial.cxx`, added it to the header `hello.h` and to the build, and everything works ;)
+
