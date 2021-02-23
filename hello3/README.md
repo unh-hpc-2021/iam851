@@ -66,3 +66,8 @@ Finally, I went and used the C++ `std::string` instead of `const char *`.
 
 Moved it into `factorial.cxx`, added it to the header `hello.h` and to the build, and everything works ;)
 
+### Add a `Makefile`
+
+I replaced the `build.sh` by a basic Makefile, just like we did for C.
+
+
