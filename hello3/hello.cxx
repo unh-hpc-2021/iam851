@@ -1,7 +1,7 @@
 
-#include <stdio.h>
+#include <iostream>
 
-void greeting(void) { printf("Hi there.\n"); }
+void greeting(void) { std::cout << "Hi there.\n"; }
 
 int factorial(int n) {
   int i;
@@ -17,5 +17,5 @@ int factorial(int n) {
 int main(int argc, char **argv) {
   greeting();
 
-  printf("10 factorial is %d\n", factorial(10));
+  std::cout << "10 factorial is " << factorial(10) << "\n";
 }
