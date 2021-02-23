@@ -15,7 +15,7 @@ int factorial(int n) {
 }
 
 int main(int argc, char **argv) {
-  greeting();
+  greeting("everyone");
 
   std::cout << "10 factorial is " << factorial(10) << "\n";
 }
