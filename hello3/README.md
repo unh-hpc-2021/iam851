@@ -59,3 +59,6 @@ collect2: error: ld returned 1 exit status
 What happens here is that in C++, functions remember what arguments they are called with. The `main()` program calls `greeting()` with no arguments, but the function we defined is `greeting(const char *)`, which doesn't match, so no `greeting()` function was found, that's what the error is about.
 
 After the header consistent, everything works again.
+
+Finally, I went and used the C++ `std::string` instead of `const char *`.
+

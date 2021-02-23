@@ -3,4 +3,4 @@
 
 #include <iostream>
 
-void greeting(const char *name) { std::cout << "Hi there, " << name << "\n"; }
+void greeting(std::string name) { std::cout << "Hi there, " << name << "!\n"; }
