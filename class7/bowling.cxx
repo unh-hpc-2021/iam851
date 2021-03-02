@@ -12,7 +12,11 @@
 
 int bowlingScore(const std::vector<int>& rolls)
 {
-  return 0;
+  int score = 0;
+  for (int roll : rolls) {
+    score += roll;
+  }
+  return score;
 }
 
 // ======================================================================
