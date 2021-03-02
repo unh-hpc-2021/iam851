@@ -13,8 +13,9 @@
 int bowlingScore(const std::vector<int>& rolls)
 {
   int score = 0;
-  for (int roll : rolls) {
-    score += roll;
+  int n_rolls = rolls.size();
+  for (int i = 0; i < n_rolls; i++) {
+    score += rolls[i];
   }
   return score;
 }
