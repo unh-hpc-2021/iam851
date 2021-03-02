@@ -31,5 +31,8 @@ if (NOT GTEST_FOUND)
   target_link_libraries(GTest::Main INTERFACE gtest_main)
 endif()
 
+enable_testing()
+
 add_executable(bowling bowling.cxx)
 target_link_libraries(bowling GTest::GTest GTest::Main)
+gtest_discover_tests(bowling)
