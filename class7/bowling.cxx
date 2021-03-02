@@ -25,3 +25,11 @@ TEST(Bowling, AllZeros)
   };
   EXPECT_EQ(bowlingScore(rolls), 0);
 }
+
+TEST(Bowling, RegularGame)
+{
+  std::vector<int> rolls = {
+    0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 6,
+  };
+  EXPECT_EQ(bowlingScore(rolls), 14);
+}
