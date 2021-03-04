@@ -69,3 +69,10 @@ TEST(Bowling, Strike)
   EXPECT_EQ(bowlingScore(rolls),
             5 + 4 + 6 + 3 + 3 + 4 + 10 + 1 + 7 + 1 + 7 + 3 + 6);
 }
+
+TEST(Bowling, PerfectGame)
+{
+  std::vector<int> rolls = {10, 10, 10, 10, 10, 10, 10,
+                            10, 10, 10, 10, 10}; // 10 strikes + 2 bonus strikes
+  EXPECT_EQ(bowlingScore(rolls), 300);
+}
