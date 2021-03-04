@@ -13,14 +13,15 @@
 int bowlingScore(const std::vector<int>& rolls)
 {
   int score = 0;
+  int frame_start = 0;
   for (int frame = 0; frame < 10; frame++) {
-    int frame_start = 2 * frame;
     int frame_score = rolls[frame_start] + rolls[frame_start + 1];
     if (frame_score == 10) { // spare
       score += frame_score + rolls[frame_start + 2];
     } else {
       score += frame_score;
     }
+    frame_start += 2;
   }
   return score;
 }
