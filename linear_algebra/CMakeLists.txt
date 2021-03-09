@@ -34,4 +34,5 @@ endif()
 enable_testing()
 
 add_subdirectory(c)
+add_subdirectory(cxx)
 
