@@ -1,11 +1,15 @@
 
 #include "linear_algebra.h"
 
-double vector_dot(const double* x, const double* y, int n)
+#include <assert.h>
+
+double vector_dot(const struct vector* x, const struct vector* y)
 {
-  double sum = 0.f;
-  for (int i = 0; i < n; i++) {
-    sum += x[i] * y[i];
+  assert(x->n == y->n); // can only dot vectors of same length
+  
+  double sum = 0.;
+  for (int i = 0; i < x->n; i++) {
+    sum += VEC(x, i) * VEC(y, i);
   }
   return sum;
 }

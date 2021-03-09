@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     VEC(&y, i) = 2. + i;
   }
 
-  assert(vector_dot(x.data, y.data, x.n) == 20);
+  assert(vector_dot(&x, &y) == 20);
 
   vector_destruct(&x);
   vector_destruct(&y);
