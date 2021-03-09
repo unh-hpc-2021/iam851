@@ -7,6 +7,8 @@ struct vector {
   int n;
 };
 
+#define VEC(v, i) ((v)->data[i])
+
 void vector_construct(struct vector *v, int n);
 void vector_destruct(struct vector *v);
 

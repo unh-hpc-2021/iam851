@@ -18,8 +18,8 @@ int main(int argc, char** argv)
   vector_construct(&y, N);
 
   for (int i = 0; i < N; i++) {
-    x.data[i] = 1. + i;
-    y.data[i] = 2. + i;
+    VEC(&x, i) = 1. + i;
+    VEC(&y, i) = 2. + i;
   }
 
   assert(vector_dot(x.data, y.data, x.n) == 20);
