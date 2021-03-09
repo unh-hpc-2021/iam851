@@ -1,7 +1,7 @@
 
 #include "linear_algebra.h"
 
-void matrix_vector_mul(double A[N][N], double* x, double *y)
+void matrix_vector_mul(const double A[N][N], const double* x, double *y)
 {
   for (int j = 0; j < N; j++) {
     y[j] = 0.;
