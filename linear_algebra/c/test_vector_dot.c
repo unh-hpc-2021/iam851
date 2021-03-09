@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define N (3)
-
 // ----------------------------------------------------------------------
 // main
 //
@@ -13,10 +11,21 @@
 
 int main(int argc, char** argv)
 {
-  double x[N] = {1., 2., 3.};
-  double y[N] = {2., 3., 4.};
+  const int N = 3;
+  struct vector x;
+  vector_construct(&x, N);
+  struct vector y;
+  vector_construct(&y, N);
 
-  assert(vector_dot(x, y, N) == 20);
+  for (int i = 0; i < N; i++) {
+    x.data[i] = 1. + i;
+    y.data[i] = 2. + i;
+  }
+
+  assert(vector_dot(x.data, y.data, x.n) == 20);
+
+  vector_destruct(&x);
+  vector_destruct(&y);
 
   return 0;
 }
