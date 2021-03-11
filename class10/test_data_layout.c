@@ -4,6 +4,9 @@
 #define N 3
 #define M 4
 
+// implemented in Fortran
+void print_matrix_(double *A);
+
 void
 print_matrix(double A[N][M])
 {
@@ -51,6 +54,10 @@ main(int argc, char **argv)
 
   printf("print_matrix_linear:\n");
   print_matrix_linear(&A[0][0], N*M);
+  printf("\n");
+  
+  printf("print_matrix (fortran):\n");
+  print_matrix_((double *)A);
   printf("\n");
 
   return 0;
