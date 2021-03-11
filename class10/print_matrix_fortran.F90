@@ -3,7 +3,7 @@
 #define M 4
 
 ! ----------------------------------------------------------------------
-program main
+subroutine print_matrix(A)
 ! ----------------------------------------------------------------------
   implicit none
   
@@ -12,12 +12,11 @@ program main
   
   do i = 1, N 
      do j = 1, M
-        A(i, j) = i * 10 + j
+        write(*, ' (F4.0)', advance='no') A(i, j) ! this is Fortran90
      end do
+     write(*, *)
   end do
   
-  print *, 'print_matrix'
-  call print_matrix(A)
-  
-end program main
+end subroutine print_matrix
+
 
