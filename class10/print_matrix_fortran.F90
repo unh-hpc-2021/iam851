@@ -19,4 +19,20 @@ subroutine print_matrix(A)
   
 end subroutine print_matrix
 
+! ----------------------------------------------------------------------
+subroutine print_matrix_linear(A)
+! ----------------------------------------------------------------------
+   implicit none
+     
+   real*8 A(N*M)
+   integer i
+     
+   do i = 1, N*M 
+      write(*, ' (F4.0)', advance='no') A(i) ! this is Fortran90
+   end do
+   write(*, *)
+     
+end subroutine print_matrix_linear
+   
+
 
