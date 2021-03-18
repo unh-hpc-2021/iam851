@@ -54,5 +54,7 @@ void vector_add(const struct vector* x, const struct vector* y,
                 const struct vector* z);
 void matrix_vector_mul(const struct matrix* A, const struct vector* x,
                        struct vector* y);
+void matrix_matrix_mul(const struct matrix* A, const struct matrix* B,
+                       struct matrix* C);
 
 #endif
