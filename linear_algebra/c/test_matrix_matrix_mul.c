@@ -44,7 +44,7 @@ static void setup_test_matrices(struct matrix* A, struct matrix* B,
 
 int main(int argc, char** argv)
 {
-  const int m = 5, n = 5, k = 5;
+  const int m = 500, n = 500, k = 200;
 
   struct matrix A, B, C, C_ref;
   matrix_construct(&C, m, n);
@@ -58,8 +58,8 @@ int main(int argc, char** argv)
   // calculate C = AB
   matrix_matrix_mul(&A, &B, &C);
 
-  printf("C = ");
-  matrix_print(&C);
+  // printf("C = ");
+  // matrix_print(&C);
 
   // the resulting vector for this test should equal our reference result
   // FIXME, matrix_is_equal() is missing
