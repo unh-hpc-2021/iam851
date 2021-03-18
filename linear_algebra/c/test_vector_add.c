@@ -30,6 +30,12 @@ int main(int argc, char** argv)
   vector_add(&x, &y, &z);
   assert(vector_is_equal(&z, &z_ref));
 
+  printf("{");
+  for (int i = 0; i < 4; i++) {
+    printf(" %g", VEC(&z, i));
+  }
+  printf(" }\n");
+
   vector_destruct(&x);
   vector_destruct(&y);
   vector_destruct(&z);
