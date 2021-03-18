@@ -44,13 +44,13 @@ static void setup_test_matrices(struct matrix* A, struct matrix* B,
 
 int main(int argc, char** argv)
 {
-  const int m = 500, n = 500, k = 200;
+  const int m = 5000, n = 5000, k = 200;
 
   struct matrix A, B, C, C_ref;
-  matrix_construct(&C, m, n);
-  matrix_construct(&C_ref, m, n);
   matrix_construct(&A, m, k);
   matrix_construct(&B, k, n);
+  matrix_construct(&C, m, n);
+  matrix_construct(&C_ref, m, n);
 
   // build a test matrix
   setup_test_matrices(&A, &B, &C_ref);
