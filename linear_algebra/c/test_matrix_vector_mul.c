@@ -14,9 +14,7 @@
 int main(int argc, char** argv)
 {
   double x[N] = {1., 2., 3.};
-  double A[N][N] = {{1., 1., 0.},
-		    {0., 2., 0.},
-		    {0., 0., 3.}};
+  double A[N][N] = {{1., 1., 0.}, {0., 2., 0.}, {0., 0., 3.}};
   double y[N];
 
   matrix_vector_mul(N, A, x, y);
