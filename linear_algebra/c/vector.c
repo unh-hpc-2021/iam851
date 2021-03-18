@@ -1,6 +1,7 @@
 
 #include "linear_algebra.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 void vector_construct(struct vector* v, int n)
@@ -27,4 +28,13 @@ bool vector_is_equal(const struct vector* x, const struct vector* y)
   }
 
   return true;
+}
+
+void vector_print(const struct vector* v)
+{
+  printf("{");
+  for (int i = 0; i < v->n; i++) {
+    printf(" %g", VEC(v, i));
+  }
+  printf(" }\n");
 }
