@@ -2,6 +2,9 @@
 #ifndef LINEAR_ALGEBRA_H
 #define LINEAR_ALGEBRA_H
 
+#include <assert.h>
+
+//#define BOUNDS_CHECK
 #include <stdbool.h>
 
 struct vector
@@ -10,7 +13,15 @@ struct vector
   int n;
 };
 
+#ifdef BOUNDS_CHECK
+#define VEC(v, i)                                                              \
+  (*({                                                                         \
+    assert(i >= 0 && i < (v)->n);                                              \
+    &(v)->data[i];                                                             \
+  }))
+#else
 #define VEC(v, i) ((v)->data[i])
+#endif
 
 void vector_construct(struct vector* v, int n);
 void vector_destruct(struct vector* v);
@@ -21,7 +32,16 @@ struct matrix
   int m, n;
 };
 
+#ifdef BOUNDS_CHECK
+#define MAT(A, i, j)                                                           \
+  (*({                                                                         \
+    assert(i >= 0 && i < (A)->m);                                              \
+    assert(j >= 0 && j < (A)->n);                                              \
+    &(A)->data[i * (A)->n + j];                                                \
+  }))
+#else
 #define MAT(A, i, j) ((A)->data[i * (A)->n + j])
+#endif
 
 void matrix_construct(struct matrix* A, int m, int n);
 void matrix_destruct(struct matrix* A);
