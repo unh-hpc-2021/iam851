@@ -25,6 +25,7 @@ struct vector
 
 void vector_construct(struct vector* v, int n);
 void vector_destruct(struct vector* v);
+void vector_print(const struct vector* v);
 
 struct matrix
 {
