@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define N (3)
-
 // ----------------------------------------------------------------------
 // main
 //
@@ -13,12 +11,26 @@
 
 int main(int argc, char** argv)
 {
-  double x[N] = {1., 2., 3.};
-  double A[N][N] = {{1., 1., 0.}, {0., 2., 0.}, {0., 0., 3.}};
-  double y[N];
+  const int N = 3;
+  struct vector x;
+  vector_construct(&x, N);
+  struct vector y;
+  vector_construct(&y, N);
+  struct matrix A;
+  matrix_construct(&A, N, N);
 
-  matrix_vector_mul(N, A, x, y);
-  assert(y[0] == 3. && y[1] == 4. && y[2] == 9.);
+  for (int i = 0; i < N; i++) {
+    VEC(&x, i) = 1. + i;
+    MAT(&A, i, i) = 1. + i;
+  }
+  MAT(&A, 0, 1) = 1.; // make the matrix not purely diagonal
+
+  matrix_vector_mul(&A, &x, &y);
+  assert(VEC(&y, 0) == 3. && VEC(&y, 1) == 4. && VEC(&y, 2) == 9.);
+
+  vector_destruct(&x);
+  vector_destruct(&y);
+  matrix_destruct(&A);
 
   return 0;
 }
