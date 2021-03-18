@@ -2,6 +2,8 @@
 #ifndef LINEAR_ALGEBRA_H
 #define LINEAR_ALGEBRA_H
 
+#include <stdbool.h>
+
 struct vector
 {
   double* data;
@@ -24,6 +26,7 @@ struct matrix
 void matrix_construct(struct matrix* A, int m, int n);
 void matrix_destruct(struct matrix* A);
 
+bool vector_is_equal(const struct vector* x, const struct vector* y);
 double vector_dot(const struct vector* x, const struct vector* y);
 void vector_add(const struct vector* x, const struct vector* y,
                 const struct vector* z);

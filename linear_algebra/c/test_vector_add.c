@@ -18,19 +18,22 @@ int main(int argc, char** argv)
   vector_construct(&y, N);
   struct vector z;
   vector_construct(&z, N);
+  struct vector z_ref;
+  vector_construct(&z_ref, N);
 
   for (int i = 0; i < N; i++) {
     VEC(&x, i) = 1. + i;
     VEC(&y, i) = 2. + i;
+    VEC(&z_ref, i) = 3. + 2 * i;
   }
 
   vector_add(&x, &y, &z);
-  assert(VEC(&z, 0) == 3. && VEC(&z, 1) == 5. && VEC(&z, 2) == 7. &&
-         VEC(&z, 3) == 9.);
+  assert(vector_is_equal(&z, &z_ref));
 
   vector_destruct(&x);
   vector_destruct(&y);
   vector_destruct(&z);
+  vector_destruct(&z_ref);
 
   return 0;
 }
