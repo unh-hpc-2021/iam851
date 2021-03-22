@@ -1,9 +1,14 @@
 
 #include "linear_algebra.h"
 
-void vector_add(double* x, double* y, double *z)
+#include <assert.h>
+
+void vector_add(const struct vector* x, const struct vector* y,
+                const struct vector* z)
 {
-  for (int i = 0; i < N; i++) {
-    z[i] = x[i] + y[i];
+  assert(x->n == y->n && x->n == z->n);
+
+  for (int i = 0; i < x->n; i++) {
+    VEC(z, i) = VEC(x, i) + VEC(y, i);
   }
 }
