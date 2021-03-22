@@ -3,11 +3,14 @@
 
 #include <assert.h>
 
-void vector_add(const vector& x, const vector& y, vector& z)
+vector vector_add(const vector& x, const vector& y)
 {
-  assert(x.size() == y.size() && x.size() == z.size());
+  assert(x.size() == y.size());
+  vector z(x.size());
 
   for (int i = 0; i < x.size(); i++) {
     z(i) = x(i) + y(i);
   }
+
+  return z;
 }
