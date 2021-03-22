@@ -9,10 +9,7 @@
 TEST(LinearAlgebra, VectorDot)
 {
   const int N = 3;
-  vector x;
-  vector_construct(x, N);
-  vector y;
-  vector_construct(y, N);
+  vector x(N), y(N);
 
   for (int i = 0; i < N; i++) {
     VEC(x, i) = 1. + i;
@@ -29,14 +26,7 @@ TEST(LinearAlgebra, VectorAdd)
 {
   const int N = 4;
 
-  vector x;
-  vector_construct(x, N);
-  vector y;
-  vector_construct(y, N);
-  vector z;
-  vector_construct(z, N);
-  vector z_ref;
-  vector_construct(z_ref, N);
+  vector x(N), y(N), z(N), z_ref(N);
 
   for (int i = 0; i < N; i++) {
     VEC(x, i) = 1. + i;
@@ -57,12 +47,7 @@ TEST(LinearAlgebra, VectorAdd)
 TEST(LinearAlgebra, MatrixVectorMul)
 {
   const int N = 3;
-  vector x;
-  vector_construct(x, N);
-  vector y;
-  vector_construct(y, N);
-  vector y_ref;
-  vector_construct(y_ref, N);
+  vector x(N), y(N), y_ref(N);
   matrix A;
   matrix_construct(A, N, N);
 
