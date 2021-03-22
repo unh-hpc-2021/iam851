@@ -16,7 +16,7 @@ TEST(LinearAlgebra, VectorDot)
     y(i) = 2. + i;
   }
 
-  EXPECT_EQ(vector_dot(x, y), 20);
+  EXPECT_EQ(dot(x, y), 20);
 }
 
 TEST(LinearAlgebra, VectorAdd)

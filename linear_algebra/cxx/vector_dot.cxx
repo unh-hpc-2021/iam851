@@ -3,7 +3,7 @@
 
 #include <assert.h>
 
-double vector_dot(const vector& x, const vector& y)
+double dot(const vector& x, const vector& y)
 {
   assert(x.size() == y.size()); // can only dot vectors of same length
 
