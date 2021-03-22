@@ -23,7 +23,7 @@ double& matrix::operator()(int i, int j)
   return data_[i * n + j];
 }
 
-bool matrix_is_equal(const matrix& A, const matrix& B)
+bool operator==(const matrix& A, const matrix& B)
 {
   if (A.m != B.m || A.n != B.n) {
     return false;

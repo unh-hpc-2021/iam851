@@ -32,7 +32,7 @@ TEST(LinearAlgebra, VectorAdd)
   }
 
   vector_add(x, y, z);
-  EXPECT_TRUE(vector_is_equal(z, z_ref));
+  EXPECT_EQ(z, z_ref);
   // z.print();
 }
 
@@ -51,7 +51,7 @@ TEST(LinearAlgebra, MatrixVectorMul)
   y_ref(0) += 1. * x(1);
 
   matrix_vector_mul(A, x, y);
-  EXPECT_TRUE(vector_is_equal(y, y_ref));
+  EXPECT_EQ(y, y_ref);
 }
 
 static inline int min(int i, int j)
@@ -102,5 +102,5 @@ TEST(LinearAlgebra, MatrixMatrixMul)
   // C.print();
 
   // the resulting vector for this test should equal our reference result
-  EXPECT_TRUE(matrix_is_equal(C, C_ref));
+  EXPECT_TRUE(C == C_ref);
 }

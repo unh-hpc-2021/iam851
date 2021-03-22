@@ -23,6 +23,8 @@ private:
   std::vector<double> data_;
 };
 
+bool operator==(const vector& x, const vector& y);
+
 class matrix
 {
 public:
@@ -39,8 +41,7 @@ private:
   std::vector<double> data_;
 };
 
-bool matrix_is_equal(const matrix& A, const matrix& B);
-bool vector_is_equal(const vector& x, const vector& y);
+bool operator==(const matrix& A, const matrix& B);
 double vector_dot(const vector& x, const vector& y);
 void vector_add(const vector& x, const vector& y, vector& z);
 void matrix_vector_mul(const matrix& A, const vector& x, vector& y);

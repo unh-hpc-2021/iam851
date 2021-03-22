@@ -26,7 +26,7 @@ double& vector::operator()(int i)
   return data_[i];
 }
 
-bool vector_is_equal(const vector& x, const vector& y)
+bool operator==(const vector& x, const vector& y)
 {
   if (x.size() != y.size()) {
     return false;
