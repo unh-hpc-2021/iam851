@@ -3,16 +3,11 @@
 
 #include <stdio.h>
 
-vector::vector(int n) : data_(new double[n]), n_(n) {}
-
-vector::~vector()
-{
-  delete[] data_;
-}
+vector::vector(int n) : data_(n) {}
 
 int vector::size() const
 {
-  return n_;
+  return data_.size();
 }
 
 double vector::operator()(int i) const

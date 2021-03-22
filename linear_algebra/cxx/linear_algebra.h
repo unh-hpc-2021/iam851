@@ -5,13 +5,13 @@
 #include <assert.h>
 
 #define BOUNDS_CHECK
-#include <stdbool.h>
+
+#include <vector>
 
 class vector
 {
 public:
   vector(int n);
-  ~vector();
 
   int size() const;
   double operator()(int i) const;
@@ -20,8 +20,7 @@ public:
   void print() const;
 
 private:
-  double* data_;
-  int n_;
+  std::vector<double> data_;
 };
 
 struct matrix
