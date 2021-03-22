@@ -1,6 +1,7 @@
 
 #include <gtest/gtest.h>
 
+#include <algorithm>
 #include <stdio.h>
 #include <assert.h>
 
@@ -54,15 +55,6 @@ TEST(LinearAlgebra, MatrixVectorMul)
   EXPECT_EQ(y, y_ref);
 }
 
-static inline int min(int i, int j)
-{
-  if (i < j) {
-    return i;
-  } else {
-    return j;
-  }
-}
-
 // ----------------------------------------------------------------------
 // setup_test_matrices
 //
@@ -75,13 +67,13 @@ static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
 
   // the matrices are initialized to zero, so we only set the non-zero elements
   // on the diagonal
-  for (int i = 0; i < min(A.m, A.n); i++) {
+  for (int i = 0; i < std::min(A.m, A.n); i++) {
     A(i, i) = i;
   }
-  for (int i = 0; i < min(B.m, B.n); i++) {
+  for (int i = 0; i < std::min(B.m, B.n); i++) {
     B(i, i) = i;
   }
-  for (int i = 0; i < min(min(C_ref.m, C_ref.n), A.n); i++) {
+  for (int i = 0; i < std::min({C_ref.m, C_ref.n, A.n}); i++) {
     C_ref(i, i) = i * i;
   }
 }
