@@ -12,21 +12,14 @@ struct vector
   vector(int n);
   ~vector();
 
+  double operator()(int i) const;
+  double& operator()(int i);
+
   void print() const;
 
   double* data;
   int n;
 };
-
-#ifdef BOUNDS_CHECK
-#define VEC(v, i)                                                              \
-  (*({                                                                         \
-    assert(i >= 0 && i < (v).n);                                               \
-    &(v).data[i];                                                              \
-  }))
-#else
-#define VEC(v, i) ((v).data[i])
-#endif
 
 struct matrix
 {

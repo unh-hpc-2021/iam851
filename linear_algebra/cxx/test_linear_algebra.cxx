@@ -12,8 +12,8 @@ TEST(LinearAlgebra, VectorDot)
   vector x(N), y(N);
 
   for (int i = 0; i < N; i++) {
-    VEC(x, i) = 1. + i;
-    VEC(y, i) = 2. + i;
+    x(i) = 1. + i;
+    y(i) = 2. + i;
   }
 
   EXPECT_EQ(vector_dot(x, y), 20);
@@ -26,9 +26,9 @@ TEST(LinearAlgebra, VectorAdd)
   vector x(N), y(N), z(N), z_ref(N);
 
   for (int i = 0; i < N; i++) {
-    VEC(x, i) = 1. + i;
-    VEC(y, i) = 2. + i;
-    VEC(z_ref, i) = 3. + 2 * i;
+    x(i) = 1. + i;
+    y(i) = 2. + i;
+    z_ref(i) = 3. + 2 * i;
   }
 
   vector_add(x, y, z);
@@ -43,12 +43,12 @@ TEST(LinearAlgebra, MatrixVectorMul)
   matrix A(N, N);
 
   for (int i = 0; i < N; i++) {
-    VEC(x, i) = 1. + i;
+    x(i) = 1. + i;
     A(i, i) = 1. + i;
-    VEC(y_ref, i) = (1. + i) * (1. + i);
+    y_ref(i) = (1. + i) * (1. + i);
   }
   A(0, 1) = 1.; // make the matrix not purely diagonal
-  VEC(y_ref, 0) += 1. * VEC(x, 1);
+  y_ref(0) += 1. * x(1);
 
   matrix_vector_mul(A, x, y);
   EXPECT_TRUE(vector_is_equal(y, y_ref));
