@@ -21,7 +21,7 @@ void matrix_matrix_mul(const struct matrix* A, const struct matrix* B,
   for (int i = 0; i < C->m; i++) {
     for (int j = 0; j < C->n; j++) {
       MAT(C, i, j) = 0.;
-      for (int k = 0; k < C->m; k++) {
+      for (int k = 0; k < B->m; k++) {
         MAT(C, i, j) += MAT(A, i, k) * MAT(B, k, j);
       }
     }
