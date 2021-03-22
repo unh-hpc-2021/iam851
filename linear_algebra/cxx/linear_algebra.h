@@ -7,16 +7,19 @@
 #define BOUNDS_CHECK
 #include <stdbool.h>
 
-struct vector
+class vector
 {
+public:
   vector(int n);
   ~vector();
 
+  int size() const;
   double operator()(int i) const;
   double& operator()(int i);
 
   void print() const;
 
+private:
   double* data;
   int n;
 };

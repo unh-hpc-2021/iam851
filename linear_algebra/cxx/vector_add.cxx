@@ -5,9 +5,9 @@
 
 void vector_add(const vector& x, const vector& y, vector& z)
 {
-  assert(x.n == y.n && x.n == z.n);
+  assert(x.size() == y.size() && x.size() == z.size());
 
-  for (int i = 0; i < x.n; i++) {
+  for (int i = 0; i < x.size(); i++) {
     z(i) = x(i) + y(i);
   }
 }
