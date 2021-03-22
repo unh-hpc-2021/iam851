@@ -20,8 +20,8 @@ public:
   void print() const;
 
 private:
-  double* data;
-  int n;
+  double* data_;
+  int n_;
 };
 
 struct matrix

@@ -3,32 +3,32 @@
 
 #include <stdio.h>
 
-vector::vector(int _n) : data(new double[_n]), n(_n) {}
+vector::vector(int n) : data_(new double[n]), n_(n) {}
 
 vector::~vector()
 {
-  delete[] data;
+  delete[] data_;
 }
 
 int vector::size() const
 {
-  return n;
+  return n_;
 }
 
 double vector::operator()(int i) const
 {
 #ifdef BOUNDS_CHECK
-  assert(i >= 0 && i < n);
+  assert(i >= 0 && i < size());
 #endif
-  return data[i];
+  return data_[i];
 }
 
 double& vector::operator()(int i)
 {
 #ifdef BOUNDS_CHECK
-  assert(i >= 0 && i < n);
+  assert(i >= 0 && i < size());
 #endif
-  return data[i];
+  return data_[i];
 }
 
 bool vector_is_equal(const vector& x, const vector& y)
@@ -49,7 +49,7 @@ bool vector_is_equal(const vector& x, const vector& y)
 void vector::print() const
 {
   printf("{");
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < size(); i++) {
     printf(" %g", (*this)(i));
   }
   printf(" }\n");
