@@ -3,12 +3,7 @@
 
 #include <stdio.h>
 
-void matrix_construct(matrix& A, int m, int n)
-{
-  A.data = new double[m * n];
-  A.m = m;
-  A.n = n;
-}
+matrix::matrix(int _m, int _n) : data(new double[_m * _n]), m(_m), n(_n) {}
 
 void matrix_destruct(matrix& A)
 {

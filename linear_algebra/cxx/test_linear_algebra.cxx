@@ -48,8 +48,7 @@ TEST(LinearAlgebra, MatrixVectorMul)
 {
   const int N = 3;
   vector x(N), y(N), y_ref(N);
-  matrix A;
-  matrix_construct(A, N, N);
+  matrix A(N, N);
 
   for (int i = 0; i < N; i++) {
     VEC(x, i) = 1. + i;
@@ -103,11 +102,7 @@ TEST(LinearAlgebra, MatrixMatrixMul)
 {
   const int m = 500, n = 500, k = 200;
 
-  matrix A, B, C, C_ref;
-  matrix_construct(C, m, n);
-  matrix_construct(C_ref, m, n);
-  matrix_construct(A, m, k);
-  matrix_construct(B, k, n);
+  matrix A(m, k), B(k, n), C(m, n), C_ref(m, n);
 
   // build a test matrix
   setup_test_matrices(A, B, C_ref);
