@@ -17,9 +17,6 @@ TEST(LinearAlgebra, VectorDot)
   }
 
   EXPECT_EQ(vector_dot(x, y), 20);
-
-  vector_destruct(x);
-  vector_destruct(y);
 }
 
 TEST(LinearAlgebra, VectorAdd)
@@ -37,11 +34,6 @@ TEST(LinearAlgebra, VectorAdd)
   vector_add(x, y, z);
   EXPECT_TRUE(vector_is_equal(z, z_ref));
   // z.print();
-
-  vector_destruct(x);
-  vector_destruct(y);
-  vector_destruct(z);
-  vector_destruct(z_ref);
 }
 
 TEST(LinearAlgebra, MatrixVectorMul)
@@ -60,10 +52,6 @@ TEST(LinearAlgebra, MatrixVectorMul)
 
   matrix_vector_mul(A, x, y);
   EXPECT_TRUE(vector_is_equal(y, y_ref));
-
-  vector_destruct(x);
-  vector_destruct(y);
-  matrix_destruct(A);
 }
 
 static inline int min(int i, int j)
@@ -115,10 +103,4 @@ TEST(LinearAlgebra, MatrixMatrixMul)
 
   // the resulting vector for this test should equal our reference result
   EXPECT_TRUE(matrix_is_equal(C, C_ref));
-
-  // clean up
-  matrix_destruct(A);
-  matrix_destruct(B);
-  matrix_destruct(C);
-  matrix_destruct(C_ref);
 }

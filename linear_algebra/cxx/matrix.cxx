@@ -5,9 +5,9 @@
 
 matrix::matrix(int _m, int _n) : data(new double[_m * _n]), m(_m), n(_n) {}
 
-void matrix_destruct(matrix& A)
+matrix::~matrix()
 {
-  delete[] A.data;
+  delete[] data;
 }
 
 bool matrix_is_equal(const matrix& A, const matrix& B)

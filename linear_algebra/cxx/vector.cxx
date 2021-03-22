@@ -5,9 +5,9 @@
 
 vector::vector(int _n) : data(new double[_n]), n(_n) {}
 
-void vector_destruct(vector& v)
+vector::~vector()
 {
-  delete[] v.data;
+  delete[] data;
 }
 
 bool vector_is_equal(const vector& x, const vector& y)
