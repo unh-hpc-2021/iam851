@@ -62,8 +62,7 @@ int main(int argc, char** argv)
   // matrix_print(&C);
 
   // the resulting vector for this test should equal our reference result
-  // FIXME, matrix_is_equal() is missing
-  //  assert(matrix_is_equal(C, C_ref));
+  assert(matrix_is_equal(&C, &C_ref));
 
   // clean up
   matrix_destruct(&A);
