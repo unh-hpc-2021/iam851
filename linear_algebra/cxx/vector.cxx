@@ -4,18 +4,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void vector_construct(struct vector* v, int n)
+void vector_construct(vector* v, int n)
 {
   v->data = (double*)calloc(n, sizeof(*v->data));
   v->n = n;
 }
 
-void vector_destruct(struct vector* v)
+void vector_destruct(vector* v)
 {
   free(v->data);
 }
 
-bool vector_is_equal(const struct vector* x, const struct vector* y)
+bool vector_is_equal(const vector* x, const vector* y)
 {
   if (x->n != y->n) {
     return false;
@@ -30,7 +30,7 @@ bool vector_is_equal(const struct vector* x, const struct vector* y)
   return true;
 }
 
-void vector_print(const struct vector* v)
+void vector_print(const vector* v)
 {
   printf("{");
   for (int i = 0; i < v->n; i++) {

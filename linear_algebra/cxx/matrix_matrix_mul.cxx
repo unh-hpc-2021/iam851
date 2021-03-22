@@ -9,8 +9,7 @@
 // B: 2nd input matrix (k x n matrix)
 // C: result (m x n matrix)
 
-void matrix_matrix_mul(const struct matrix* A, const struct matrix* B,
-                       struct matrix* C)
+void matrix_matrix_mul(const matrix* A, const matrix* B, matrix* C)
 {
   // make sure the dimensions all match as needed for matrix-matrix
   // multiplication

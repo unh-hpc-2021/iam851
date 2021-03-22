@@ -9,9 +9,9 @@
 TEST(LinearAlgebra, VectorDot)
 {
   const int N = 3;
-  struct vector x;
+  vector x;
   vector_construct(&x, N);
-  struct vector y;
+  vector y;
   vector_construct(&y, N);
 
   for (int i = 0; i < N; i++) {
@@ -28,13 +28,14 @@ TEST(LinearAlgebra, VectorDot)
 TEST(LinearAlgebra, VectorAdd)
 {
   const int N = 4;
-  struct vector x;
+
+  vector x;
   vector_construct(&x, N);
-  struct vector y;
+  vector y;
   vector_construct(&y, N);
-  struct vector z;
+  vector z;
   vector_construct(&z, N);
-  struct vector z_ref;
+  vector z_ref;
   vector_construct(&z_ref, N);
 
   for (int i = 0; i < N; i++) {
@@ -56,13 +57,13 @@ TEST(LinearAlgebra, VectorAdd)
 TEST(LinearAlgebra, MatrixVectorMul)
 {
   const int N = 3;
-  struct vector x;
+  vector x;
   vector_construct(&x, N);
-  struct vector y;
+  vector y;
   vector_construct(&y, N);
-  struct vector y_ref;
+  vector y_ref;
   vector_construct(&y_ref, N);
-  struct matrix A;
+  matrix A;
   matrix_construct(&A, N, N);
 
   for (int i = 0; i < N; i++) {
@@ -95,8 +96,7 @@ static inline int min(int i, int j)
 //
 // initializes the two matrices A, B, and the reference solution C_ref
 
-static void setup_test_matrices(struct matrix* A, struct matrix* B,
-                                struct matrix* C_ref)
+static void setup_test_matrices(matrix* A, matrix* B, matrix* C_ref)
 {
   // the test matrices are diagonal, which isn't really good,
   // a more general test case would be better.
@@ -118,7 +118,7 @@ TEST(LinearAlgebra, MatrixMatrixMul)
 {
   const int m = 500, n = 500, k = 200;
 
-  struct matrix A, B, C, C_ref;
+  matrix A, B, C, C_ref;
   matrix_construct(&C, m, n);
   matrix_construct(&C_ref, m, n);
   matrix_construct(&A, m, k);
