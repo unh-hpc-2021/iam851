@@ -15,8 +15,8 @@ TEST(LinearAlgebra, VectorDot)
   vector_construct(y, N);
 
   for (int i = 0; i < N; i++) {
-    VEC(&x, i) = 1. + i;
-    VEC(&y, i) = 2. + i;
+    VEC(x, i) = 1. + i;
+    VEC(y, i) = 2. + i;
   }
 
   EXPECT_EQ(vector_dot(x, y), 20);
@@ -39,9 +39,9 @@ TEST(LinearAlgebra, VectorAdd)
   vector_construct(z_ref, N);
 
   for (int i = 0; i < N; i++) {
-    VEC(&x, i) = 1. + i;
-    VEC(&y, i) = 2. + i;
-    VEC(&z_ref, i) = 3. + 2 * i;
+    VEC(x, i) = 1. + i;
+    VEC(y, i) = 2. + i;
+    VEC(z_ref, i) = 3. + 2 * i;
   }
 
   vector_add(x, y, z);
@@ -67,12 +67,12 @@ TEST(LinearAlgebra, MatrixVectorMul)
   matrix_construct(A, N, N);
 
   for (int i = 0; i < N; i++) {
-    VEC(&x, i) = 1. + i;
-    MAT(&A, i, i) = 1. + i;
-    VEC(&y_ref, i) = (1. + i) * (1. + i);
+    VEC(x, i) = 1. + i;
+    MAT(A, i, i) = 1. + i;
+    VEC(y_ref, i) = (1. + i) * (1. + i);
   }
-  MAT(&A, 0, 1) = 1.; // make the matrix not purely diagonal
-  VEC(&y_ref, 0) += 1. * VEC(&x, 1);
+  MAT(A, 0, 1) = 1.; // make the matrix not purely diagonal
+  VEC(y_ref, 0) += 1. * VEC(x, 1);
 
   matrix_vector_mul(A, x, y);
   EXPECT_TRUE(vector_is_equal(y, y_ref));
@@ -104,13 +104,13 @@ static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
   // the matrices are initialized to zero, so we only set the non-zero elements
   // on the diagonal
   for (int i = 0; i < min(A.m, A.n); i++) {
-    MAT(&A, i, i) = i;
+    MAT(A, i, i) = i;
   }
   for (int i = 0; i < min(B.m, B.n); i++) {
-    MAT(&B, i, i) = i;
+    MAT(B, i, i) = i;
   }
   for (int i = 0; i < min(min(C_ref.m, C_ref.n), A.n); i++) {
-    MAT(&C_ref, i, i) = i * i;
+    MAT(C_ref, i, i) = i * i;
   }
 }
 

@@ -22,7 +22,7 @@ bool vector_is_equal(const vector& x, const vector& y)
   }
 
   for (int i = 0; i < x.n; i++) {
-    if (VEC(&x, i) != VEC(&y, i)) {
+    if (VEC(x, i) != VEC(y, i)) {
       return false;
     }
   }
@@ -34,7 +34,7 @@ void vector_print(const vector& v)
 {
   printf("{");
   for (int i = 0; i < v.n; i++) {
-    printf(" %g", VEC(&v, i));
+    printf(" %g", VEC(v, i));
   }
   printf(" }\n");
 }

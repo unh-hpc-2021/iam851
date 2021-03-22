@@ -16,11 +16,11 @@ struct vector
 #ifdef BOUNDS_CHECK
 #define VEC(v, i)                                                              \
   (*({                                                                         \
-    assert(i >= 0 && i < (v)->n);                                              \
-    &(v)->data[i];                                                             \
+    assert(i >= 0 && i < (v).n);                                               \
+    &(v).data[i];                                                              \
   }))
 #else
-#define VEC(v, i) ((v)->data[i])
+#define VEC(v, i) ((v).data[i])
 #endif
 
 void vector_construct(vector& v, int n);
@@ -36,12 +36,12 @@ struct matrix
 #ifdef BOUNDS_CHECK
 #define MAT(A, i, j)                                                           \
   (*({                                                                         \
-    assert(i >= 0 && i < (A)->m);                                              \
-    assert(j >= 0 && j < (A)->n);                                              \
-    &(A)->data[i * (A)->n + j];                                                \
+    assert(i >= 0 && i < (A).m);                                               \
+    assert(j >= 0 && j < (A).n);                                               \
+    &(A).data[i * (A).n + j];                                                  \
   }))
 #else
-#define MAT(A, i, j) ((A)->data[i * (A)->n + j])
+#define MAT(A, i, j) ((A).data[i * (A).n + j])
 #endif
 
 void matrix_construct(matrix& A, int m, int n);

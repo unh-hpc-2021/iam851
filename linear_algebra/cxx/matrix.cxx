@@ -23,7 +23,7 @@ bool matrix_is_equal(const matrix& A, const matrix& B)
   }
   for (int i = 0; i < A.m; i++) {
     for (int j = 0; j < A.n; j++) {
-      if (MAT(&A, i, j) != MAT(&B, i, j)) {
+      if (MAT(A, i, j) != MAT(B, i, j)) {
         return false;
       }
     }
@@ -38,7 +38,7 @@ void matrix_print(const matrix& A)
   for (int i = 0; i < A.m; i++) {
     printf("{");
     for (int j = 0; j < A.n; j++) {
-      printf(" %g", MAT(&A, i, j));
+      printf(" %g", MAT(A, i, j));
     }
     printf(" }\n");
   }

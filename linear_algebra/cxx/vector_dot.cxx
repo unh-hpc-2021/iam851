@@ -9,7 +9,7 @@ double vector_dot(const vector& x, const vector& y)
 
   double sum = 0.;
   for (int i = 0; i < x.n; i++) {
-    sum += VEC(&x, i) * VEC(&y, i);
+    sum += VEC(x, i) * VEC(y, i);
   }
   return sum;
 }
