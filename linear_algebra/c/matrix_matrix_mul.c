@@ -12,6 +12,12 @@
 void matrix_matrix_mul(const struct matrix* A, const struct matrix* B,
                        struct matrix* C)
 {
+  // make sure the dimensions all match as needed for matrix-matrix
+  // multiplication
+  assert(A->n == B->m);
+  assert(A->m == C->m);
+  assert(B->n == C->n);
+
   for (int i = 0; i < C->m; i++) {
     for (int j = 0; j < C->n; j++) {
       MAT(C, i, j) = 0.;
