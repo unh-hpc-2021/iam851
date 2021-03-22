@@ -2,17 +2,16 @@
 #include "linear_algebra.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
 void vector_construct(vector& v, int n)
 {
-  v.data = (double*)calloc(n, sizeof(*v.data));
+  v.data = new double[n];
   v.n = n;
 }
 
 void vector_destruct(vector& v)
 {
-  free(v.data);
+  delete[] v.data;
 }
 
 bool vector_is_equal(const vector& x, const vector& y)

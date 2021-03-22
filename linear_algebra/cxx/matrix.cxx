@@ -2,18 +2,17 @@
 #include "linear_algebra.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
 void matrix_construct(matrix& A, int m, int n)
 {
-  A.data = (double*)calloc(m * n, sizeof(*A.data));
+  A.data = new double[m * n];
   A.m = m;
   A.n = n;
 }
 
 void matrix_destruct(matrix& A)
 {
-  free(A.data);
+  delete[] A.data;
 }
 
 bool matrix_is_equal(const matrix& A, const matrix& B)
