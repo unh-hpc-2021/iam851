@@ -35,20 +35,12 @@ struct matrix
 
   void print() const;
 
+  double operator()(int i, int j) const;
+  double& operator()(int i, int j);
+
   double* data;
   int m, n;
 };
-
-#ifdef BOUNDS_CHECK
-#define MAT(A, i, j)                                                           \
-  (*({                                                                         \
-    assert(i >= 0 && i < (A).m);                                               \
-    assert(j >= 0 && j < (A).n);                                               \
-    &(A).data[i * (A).n + j];                                                  \
-  }))
-#else
-#define MAT(A, i, j) ((A).data[i * (A).n + j])
-#endif
 
 bool matrix_is_equal(const matrix& A, const matrix& B);
 bool vector_is_equal(const vector& x, const vector& y);

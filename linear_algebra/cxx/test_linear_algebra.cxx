@@ -44,10 +44,10 @@ TEST(LinearAlgebra, MatrixVectorMul)
 
   for (int i = 0; i < N; i++) {
     VEC(x, i) = 1. + i;
-    MAT(A, i, i) = 1. + i;
+    A(i, i) = 1. + i;
     VEC(y_ref, i) = (1. + i) * (1. + i);
   }
-  MAT(A, 0, 1) = 1.; // make the matrix not purely diagonal
+  A(0, 1) = 1.; // make the matrix not purely diagonal
   VEC(y_ref, 0) += 1. * VEC(x, 1);
 
   matrix_vector_mul(A, x, y);
@@ -76,13 +76,13 @@ static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
   // the matrices are initialized to zero, so we only set the non-zero elements
   // on the diagonal
   for (int i = 0; i < min(A.m, A.n); i++) {
-    MAT(A, i, i) = i;
+    A(i, i) = i;
   }
   for (int i = 0; i < min(B.m, B.n); i++) {
-    MAT(B, i, i) = i;
+    B(i, i) = i;
   }
   for (int i = 0; i < min(min(C_ref.m, C_ref.n), A.n); i++) {
-    MAT(C_ref, i, i) = i * i;
+    C_ref(i, i) = i * i;
   }
 }
 
