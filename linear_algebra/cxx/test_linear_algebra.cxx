@@ -10,19 +10,19 @@ TEST(LinearAlgebra, VectorDot)
 {
   const int N = 3;
   vector x;
-  vector_construct(&x, N);
+  vector_construct(x, N);
   vector y;
-  vector_construct(&y, N);
+  vector_construct(y, N);
 
   for (int i = 0; i < N; i++) {
     VEC(&x, i) = 1. + i;
     VEC(&y, i) = 2. + i;
   }
 
-  EXPECT_EQ(vector_dot(&x, &y), 20);
+  EXPECT_EQ(vector_dot(x, y), 20);
 
-  vector_destruct(&x);
-  vector_destruct(&y);
+  vector_destruct(x);
+  vector_destruct(y);
 }
 
 TEST(LinearAlgebra, VectorAdd)
@@ -30,13 +30,13 @@ TEST(LinearAlgebra, VectorAdd)
   const int N = 4;
 
   vector x;
-  vector_construct(&x, N);
+  vector_construct(x, N);
   vector y;
-  vector_construct(&y, N);
+  vector_construct(y, N);
   vector z;
-  vector_construct(&z, N);
+  vector_construct(z, N);
   vector z_ref;
-  vector_construct(&z_ref, N);
+  vector_construct(z_ref, N);
 
   for (int i = 0; i < N; i++) {
     VEC(&x, i) = 1. + i;
@@ -44,27 +44,27 @@ TEST(LinearAlgebra, VectorAdd)
     VEC(&z_ref, i) = 3. + 2 * i;
   }
 
-  vector_add(&x, &y, &z);
-  EXPECT_TRUE(vector_is_equal(&z, &z_ref));
+  vector_add(x, y, z);
+  EXPECT_TRUE(vector_is_equal(z, z_ref));
   // vector_print(&z);
 
-  vector_destruct(&x);
-  vector_destruct(&y);
-  vector_destruct(&z);
-  vector_destruct(&z_ref);
+  vector_destruct(x);
+  vector_destruct(y);
+  vector_destruct(z);
+  vector_destruct(z_ref);
 }
 
 TEST(LinearAlgebra, MatrixVectorMul)
 {
   const int N = 3;
   vector x;
-  vector_construct(&x, N);
+  vector_construct(x, N);
   vector y;
-  vector_construct(&y, N);
+  vector_construct(y, N);
   vector y_ref;
-  vector_construct(&y_ref, N);
+  vector_construct(y_ref, N);
   matrix A;
-  matrix_construct(&A, N, N);
+  matrix_construct(A, N, N);
 
   for (int i = 0; i < N; i++) {
     VEC(&x, i) = 1. + i;
@@ -74,12 +74,12 @@ TEST(LinearAlgebra, MatrixVectorMul)
   MAT(&A, 0, 1) = 1.; // make the matrix not purely diagonal
   VEC(&y_ref, 0) += 1. * VEC(&x, 1);
 
-  matrix_vector_mul(&A, &x, &y);
-  EXPECT_TRUE(vector_is_equal(&y, &y_ref));
+  matrix_vector_mul(A, x, y);
+  EXPECT_TRUE(vector_is_equal(y, y_ref));
 
-  vector_destruct(&x);
-  vector_destruct(&y);
-  matrix_destruct(&A);
+  vector_destruct(x);
+  vector_destruct(y);
+  matrix_destruct(A);
 }
 
 static inline int min(int i, int j)
@@ -96,21 +96,21 @@ static inline int min(int i, int j)
 //
 // initializes the two matrices A, B, and the reference solution C_ref
 
-static void setup_test_matrices(matrix* A, matrix* B, matrix* C_ref)
+static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
 {
   // the test matrices are diagonal, which isn't really good,
   // a more general test case would be better.
 
   // the matrices are initialized to zero, so we only set the non-zero elements
   // on the diagonal
-  for (int i = 0; i < min(A->m, A->n); i++) {
-    MAT(A, i, i) = i;
+  for (int i = 0; i < min(A.m, A.n); i++) {
+    MAT(&A, i, i) = i;
   }
-  for (int i = 0; i < min(B->m, B->n); i++) {
-    MAT(B, i, i) = i;
+  for (int i = 0; i < min(B.m, B.n); i++) {
+    MAT(&B, i, i) = i;
   }
-  for (int i = 0; i < min(min(C_ref->m, C_ref->n), A->n); i++) {
-    MAT(C_ref, i, i) = i * i;
+  for (int i = 0; i < min(min(C_ref.m, C_ref.n), A.n); i++) {
+    MAT(&C_ref, i, i) = i * i;
   }
 }
 
@@ -119,26 +119,26 @@ TEST(LinearAlgebra, MatrixMatrixMul)
   const int m = 500, n = 500, k = 200;
 
   matrix A, B, C, C_ref;
-  matrix_construct(&C, m, n);
-  matrix_construct(&C_ref, m, n);
-  matrix_construct(&A, m, k);
-  matrix_construct(&B, k, n);
+  matrix_construct(C, m, n);
+  matrix_construct(C_ref, m, n);
+  matrix_construct(A, m, k);
+  matrix_construct(B, k, n);
 
   // build a test matrix
-  setup_test_matrices(&A, &B, &C_ref);
+  setup_test_matrices(A, B, C_ref);
 
   // calculate C = AB
-  matrix_matrix_mul(&A, &B, &C);
+  matrix_matrix_mul(A, B, C);
 
   // printf("C = ");
   // matrix_print(&C);
 
   // the resulting vector for this test should equal our reference result
-  EXPECT_TRUE(matrix_is_equal(&C, &C_ref));
+  EXPECT_TRUE(matrix_is_equal(C, C_ref));
 
   // clean up
-  matrix_destruct(&A);
-  matrix_destruct(&B);
-  matrix_destruct(&C);
-  matrix_destruct(&C_ref);
+  matrix_destruct(A);
+  matrix_destruct(B);
+  matrix_destruct(C);
+  matrix_destruct(C_ref);
 }

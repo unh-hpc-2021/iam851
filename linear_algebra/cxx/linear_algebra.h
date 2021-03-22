@@ -23,9 +23,9 @@ struct vector
 #define VEC(v, i) ((v)->data[i])
 #endif
 
-void vector_construct(vector* v, int n);
-void vector_destruct(vector* v);
-void vector_print(const vector* v);
+void vector_construct(vector& v, int n);
+void vector_destruct(vector& v);
+void vector_print(const vector& v);
 
 struct matrix
 {
@@ -44,16 +44,16 @@ struct matrix
 #define MAT(A, i, j) ((A)->data[i * (A)->n + j])
 #endif
 
-void matrix_construct(matrix* A, int m, int n);
-void matrix_destruct(matrix* A);
-void matrix_print(const matrix* A);
+void matrix_construct(matrix& A, int m, int n);
+void matrix_destruct(matrix& A);
+void matrix_print(const matrix& A);
 
-bool matrix_is_equal(const matrix* A, const matrix* B);
-bool vector_is_equal(const vector* x, const vector* y);
-double vector_dot(const vector* x, const vector* y);
-void vector_add(const vector* x, const vector* y, const vector* z);
-void matrix_vector_mul(const matrix* A, const vector* x, vector* y);
-void matrix_matrix_mul(const matrix* A, const matrix* B, matrix* C);
+bool matrix_is_equal(const matrix& A, const matrix& B);
+bool vector_is_equal(const vector& x, const vector& y);
+double vector_dot(const vector& x, const vector& y);
+void vector_add(const vector& x, const vector& y, vector& z);
+void matrix_vector_mul(const matrix& A, const vector& x, vector& y);
+void matrix_matrix_mul(const matrix& A, const matrix& B, matrix& C);
 
 // ----------------------------------------------------------------------
 
