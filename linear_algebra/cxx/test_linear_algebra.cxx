@@ -31,7 +31,7 @@ TEST(LinearAlgebra, VectorAdd)
     z_ref(i) = 3. + 2 * i;
   }
 
-  vector z = vector_add(x, y);
+  vector z = x + y;
   EXPECT_EQ(z, z_ref);
   // z.print();
 }
