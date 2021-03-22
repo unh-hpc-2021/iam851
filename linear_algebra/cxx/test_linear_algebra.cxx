@@ -46,7 +46,7 @@ TEST(LinearAlgebra, VectorAdd)
 
   vector_add(x, y, z);
   EXPECT_TRUE(vector_is_equal(z, z_ref));
-  // vector_print(&z);
+  // z.print();
 
   vector_destruct(x);
   vector_destruct(y);
@@ -131,7 +131,7 @@ TEST(LinearAlgebra, MatrixMatrixMul)
   matrix_matrix_mul(A, B, C);
 
   // printf("C = ");
-  // matrix_print(&C);
+  // C.print();
 
   // the resulting vector for this test should equal our reference result
   EXPECT_TRUE(matrix_is_equal(C, C_ref));

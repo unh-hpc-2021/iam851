@@ -9,6 +9,8 @@
 
 struct vector
 {
+  void print() const;
+
   double* data;
   int n;
 };
@@ -25,10 +27,11 @@ struct vector
 
 void vector_construct(vector& v, int n);
 void vector_destruct(vector& v);
-void vector_print(const vector& v);
 
 struct matrix
 {
+  void print() const;
+
   double* data;
   int m, n;
 };
@@ -46,7 +49,6 @@ struct matrix
 
 void matrix_construct(matrix& A, int m, int n);
 void matrix_destruct(matrix& A);
-void matrix_print(const matrix& A);
 
 bool matrix_is_equal(const matrix& A, const matrix& B);
 bool vector_is_equal(const vector& x, const vector& y);

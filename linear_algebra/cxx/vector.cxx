@@ -30,11 +30,11 @@ bool vector_is_equal(const vector& x, const vector& y)
   return true;
 }
 
-void vector_print(const vector& v)
+void vector::print() const
 {
   printf("{");
-  for (int i = 0; i < v.n; i++) {
-    printf(" %g", VEC(v, i));
+  for (int i = 0; i < n; i++) {
+    printf(" %g", VEC(*this, i));
   }
   printf(" }\n");
 }

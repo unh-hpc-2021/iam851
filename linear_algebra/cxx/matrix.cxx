@@ -32,13 +32,13 @@ bool matrix_is_equal(const matrix& A, const matrix& B)
   return true;
 }
 
-void matrix_print(const matrix& A)
+void matrix::print() const
 {
   printf("{\n");
-  for (int i = 0; i < A.m; i++) {
+  for (int i = 0; i < m; i++) {
     printf("{");
-    for (int j = 0; j < A.n; j++) {
-      printf(" %g", MAT(A, i, j));
+    for (int j = 0; j < n; j++) {
+      printf(" %g", MAT(*this, i, j));
     }
     printf(" }\n");
   }
