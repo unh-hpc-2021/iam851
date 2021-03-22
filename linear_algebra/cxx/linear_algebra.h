@@ -23,18 +23,20 @@ private:
   std::vector<double> data_;
 };
 
-struct matrix
+class matrix
 {
+public:
   matrix(int m, int n);
-  ~matrix();
 
   void print() const;
 
   double operator()(int i, int j) const;
   double& operator()(int i, int j);
 
-  double* data;
   int m, n;
+
+private:
+  std::vector<double> data_;
 };
 
 bool matrix_is_equal(const matrix& A, const matrix& B);

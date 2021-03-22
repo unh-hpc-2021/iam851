@@ -3,12 +3,7 @@
 
 #include <stdio.h>
 
-matrix::matrix(int _m, int _n) : data(new double[_m * _n]), m(_m), n(_n) {}
-
-matrix::~matrix()
-{
-  delete[] data;
-}
+matrix::matrix(int m, int n) : m(m), n(n), data_(m * n) {}
 
 double matrix::operator()(int i, int j) const
 {
@@ -16,7 +11,7 @@ double matrix::operator()(int i, int j) const
   assert(i >= 0 && i < m);
   assert(j >= 0 && j < n);
 #endif
-  return data[i * n + j];
+  return data_[i * n + j];
 }
 
 double& matrix::operator()(int i, int j)
@@ -25,7 +20,7 @@ double& matrix::operator()(int i, int j)
   assert(i >= 0 && i < m);
   assert(j >= 0 && j < n);
 #endif
-  return data[i * n + j];
+  return data_[i * n + j];
 }
 
 bool matrix_is_equal(const matrix& A, const matrix& B)
