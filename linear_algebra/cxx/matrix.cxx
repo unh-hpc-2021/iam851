@@ -20,7 +20,7 @@ double& matrix::operator()(int i, int j)
   assert(i >= 0 && i < n_rows());
   assert(j >= 0 && j < n_cols());
 #endif
-  return data_[i * n_rows() + j];
+  return data_[i * n_cols() + j];
 }
 
 bool operator==(const matrix& A, const matrix& B)
