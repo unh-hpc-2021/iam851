@@ -30,14 +30,16 @@ vector operator+(const vector& x, const vector& y);
 class matrix
 {
 public:
-  matrix(int m, int n);
+  matrix(int n_rows, int n_cols);
 
   double operator()(int i, int j) const;
   double& operator()(int i, int j);
 
-  int m, n;
+  int n_rows() const { return m_; }
+  int n_cols() const { return n_; }
 
 private:
+  int m_, n_;
   std::vector<double> data_;
 };
 

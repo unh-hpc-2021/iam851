@@ -5,8 +5,8 @@
 
 void matrix_vector_mul(const matrix& A, const vector& x, vector& y)
 {
-  assert(A.m == y.size());
-  assert(A.n == x.size());
+  assert(A.n_rows() == y.size());
+  assert(A.n_cols() == x.size());
 
   for (int i = 0; i < y.size(); i++) {
     y(i) = 0.;
