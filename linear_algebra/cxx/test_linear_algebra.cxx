@@ -34,7 +34,7 @@ TEST(LinearAlgebra, VectorAdd)
 
   vector z = x + y;
   EXPECT_EQ(z, z_ref);
-  // z.print();
+  // std::cout << z << "\n";
 }
 
 TEST(LinearAlgebra, MatrixVectorMul)
@@ -53,6 +53,7 @@ TEST(LinearAlgebra, MatrixVectorMul)
 
   matrix_vector_mul(A, x, y);
   EXPECT_EQ(y, y_ref);
+  // std::cout << A << "\n";
 }
 
 // ----------------------------------------------------------------------

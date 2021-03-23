@@ -7,6 +7,7 @@
 #define BOUNDS_CHECK
 
 #include <vector>
+#include <ostream>
 
 class vector
 {
@@ -17,20 +18,19 @@ public:
   double operator()(int i) const;
   double& operator()(int i);
 
-  void print() const;
-
 private:
   std::vector<double> data_;
 };
 
 bool operator==(const vector& x, const vector& y);
+std::ostream& operator<<(std::ostream& os, const vector& v);
+double dot(const vector& x, const vector& y);
+vector operator+(const vector& x, const vector& y);
 
 class matrix
 {
 public:
   matrix(int m, int n);
-
-  void print() const;
 
   double operator()(int i, int j) const;
   double& operator()(int i, int j);
@@ -42,8 +42,7 @@ private:
 };
 
 bool operator==(const matrix& A, const matrix& B);
-double dot(const vector& x, const vector& y);
-vector operator+(const vector& x, const vector& y);
+std::ostream& operator<<(std::ostream& os, const matrix& A);
 
 void matrix_vector_mul(const matrix& A, const vector& x, vector& y);
 void matrix_matrix_mul(const matrix& A, const matrix& B, matrix& C);
