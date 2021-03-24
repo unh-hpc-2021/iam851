@@ -1,6 +1,5 @@
 
 add_library(linalgcxx
-  matrix.cxx
   vector_dot.cxx
   matrix_vector_mul.cxx
   matrix_matrix_mul.cxx
