@@ -2,30 +2,17 @@
 #ifndef LINEAR_ALGEBRA_H
 #define LINEAR_ALGEBRA_H
 
-#include <assert.h>
-
 #define BOUNDS_CHECK
 
+#include <xtensor/xtensor.hpp>
+
+#include <cassert>
 #include <vector>
 #include <ostream>
 
-class vector
-{
-public:
-  vector(int n);
+using vector = xt::xtensor<double, 1>;
 
-  int size() const;
-  double operator()(int i) const;
-  double& operator()(int i);
-
-private:
-  std::vector<double> data_;
-};
-
-bool operator==(const vector& x, const vector& y);
-std::ostream& operator<<(std::ostream& os, const vector& v);
 double dot(const vector& x, const vector& y);
-vector operator+(const vector& x, const vector& y);
 
 class matrix
 {

@@ -10,46 +10,36 @@
 TEST(LinearAlgebra, VectorDot)
 {
   const int N = 3;
-  vector x(N), y(N);
+  vector x = {1., 2., 3.};
+  vector y = {2., 3., 4.};
 
-  for (int i = 0; i < N; i++) {
-    x(i) = 1. + i;
-    y(i) = 2. + i;
-  }
-
-  EXPECT_EQ(dot(x, y), 20);
+  EXPECT_EQ(dot(x, y), 20.);
 }
 
 TEST(LinearAlgebra, VectorAdd)
 {
   const int N = 4;
 
-  vector x(N), y(N), z_ref(N);
-
-  for (int i = 0; i < N; i++) {
-    x(i) = 1. + i;
-    y(i) = 2. + i;
-    z_ref(i) = 3. + 2 * i;
-  }
+  vector x = {1., 2., 3., 4.};
+  vector y = {2., 3., 4., 5.};
 
   vector z = x + y;
-  EXPECT_EQ(z, z_ref);
+  EXPECT_EQ(z, vector({3., 5., 7., 9.}));
   // std::cout << z << "\n";
 }
 
 TEST(LinearAlgebra, MatrixVectorMul)
 {
   const int N = 3;
-  vector x(N), y(N), y_ref(N);
+  vector x = {1., 2., 3.};
+  vector y_ref = {3., 4., 9.};
+  vector y = xt::empty<double>({3});
   matrix A(N, N);
 
   for (int i = 0; i < N; i++) {
-    x(i) = 1. + i;
     A(i, i) = 1. + i;
-    y_ref(i) = (1. + i) * (1. + i);
   }
   A(0, 1) = 1.; // make the matrix not purely diagonal
-  y_ref(0) += 1. * x(1);
 
   matrix_vector_mul(A, x, y);
   EXPECT_EQ(y, y_ref);
