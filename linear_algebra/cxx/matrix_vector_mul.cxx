@@ -1,12 +1,17 @@
 
 #include "linear_algebra.h"
 
-void matrix_vector_mul(double A[N][N], double* x, double *y)
+#include <assert.h>
+
+void matrix_vector_mul(const matrix& A, const vector& x, vector& y)
 {
-  for (int j = 0; j < N; j++) {
-    y[j] = 0.;
-    for (int i = 0; i < N; i++) {
-      y[j] += A[j][i] * x[i];
+  assert(A.n_rows() == y.size());
+  assert(A.n_cols() == x.size());
+
+  for (int i = 0; i < y.size(); i++) {
+    y(i) = 0.;
+    for (int j = 0; j < x.size(); j++) {
+      y(i) += A(i, j) * x(j);
     }
   }
 }

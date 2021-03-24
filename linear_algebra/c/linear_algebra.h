@@ -4,7 +4,7 @@
 
 #include <assert.h>
 
-//#define BOUNDS_CHECK
+#define BOUNDS_CHECK
 #include <stdbool.h>
 
 struct vector
@@ -49,6 +49,7 @@ void matrix_destruct(struct matrix* A);
 void matrix_print(const struct matrix* A);
 
 bool vector_is_equal(const struct vector* x, const struct vector* y);
+bool matrix_is_equal(const struct matrix* A, const struct matrix* B);
 double vector_dot(const struct vector* x, const struct vector* y);
 void vector_add(const struct vector* x, const struct vector* y,
                 const struct vector* z);

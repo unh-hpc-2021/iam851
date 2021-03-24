@@ -1,9 +1,16 @@
 
 #include "linear_algebra.h"
 
-void vector_add(double* x, double* y, double *z)
+#include <assert.h>
+
+vector operator+(const vector& x, const vector& y)
 {
-  for (int i = 0; i < N; i++) {
-    z[i] = x[i] + y[i];
+  assert(x.size() == y.size());
+  vector z(x.size());
+
+  for (int i = 0; i < x.size(); i++) {
+    z(i) = x(i) + y(i);
   }
+
+  return z;
 }

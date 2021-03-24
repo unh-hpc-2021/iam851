@@ -1,11 +1,15 @@
 
 #include "linear_algebra.h"
 
-double vector_dot(double* x, double* y)
+#include <assert.h>
+
+double dot(const vector& x, const vector& y)
 {
-  double sum = 0.f;
-  for (int i = 0; i < N; i++) {
-    sum += x[i] * y[i];
+  assert(x.size() == y.size()); // can only dot vectors of same length
+
+  double sum = 0.;
+  for (int i = 0; i < x.size(); i++) {
+    sum += x(i) * y(i);
   }
   return sum;
 }
