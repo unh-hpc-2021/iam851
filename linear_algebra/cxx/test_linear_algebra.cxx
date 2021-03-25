@@ -2,54 +2,37 @@
 #include <gtest/gtest.h>
 
 #include <algorithm>
-#include <stdio.h>
-#include <assert.h>
+#include <xtensor/xio.hpp>
 
 #include "linear_algebra.h"
 
 TEST(LinearAlgebra, VectorDot)
 {
   const int N = 3;
-  vector x(N), y(N);
+  vector x = {1., 2., 3.};
+  vector y = {2., 3., 4.};
 
-  for (int i = 0; i < N; i++) {
-    x(i) = 1. + i;
-    y(i) = 2. + i;
-  }
-
-  EXPECT_EQ(dot(x, y), 20);
+  EXPECT_EQ(dot(x, y), 20.);
 }
 
 TEST(LinearAlgebra, VectorAdd)
 {
   const int N = 4;
 
-  vector x(N), y(N), z_ref(N);
-
-  for (int i = 0; i < N; i++) {
-    x(i) = 1. + i;
-    y(i) = 2. + i;
-    z_ref(i) = 3. + 2 * i;
-  }
+  vector x = {1., 2., 3., 4.};
+  vector y = {2., 3., 4., 5.};
 
   vector z = x + y;
-  EXPECT_EQ(z, z_ref);
+  EXPECT_EQ(z, vector({3., 5., 7., 9.}));
   // std::cout << z << "\n";
 }
 
 TEST(LinearAlgebra, MatrixVectorMul)
 {
-  const int N = 3;
-  vector x(N), y(N), y_ref(N);
-  matrix A(N, N);
-
-  for (int i = 0; i < N; i++) {
-    x(i) = 1. + i;
-    A(i, i) = 1. + i;
-    y_ref(i) = (1. + i) * (1. + i);
-  }
-  A(0, 1) = 1.; // make the matrix not purely diagonal
-  y_ref(0) += 1. * x(1);
+  vector x = {1., 2., 3.};
+  vector y_ref = {3., 4., 9.};
+  matrix A = {{1., 1., 0.}, {0., 2., 0.}, {0., 0., 3.}};
+  vector y = xt::empty<double>({3});
 
   matrix_vector_mul(A, x, y);
   EXPECT_EQ(y, y_ref);
@@ -68,13 +51,13 @@ static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
 
   // the matrices are initialized to zero, so we only set the non-zero elements
   // on the diagonal
-  for (int i = 0; i < std::min(A.n_rows(), A.n_cols()); i++) {
+  for (int i = 0; i < std::min(A.shape(0), A.shape(1)); i++) {
     A(i, i) = i;
   }
-  for (int i = 0; i < std::min(B.n_rows(), B.n_cols()); i++) {
+  for (int i = 0; i < std::min(B.shape(0), B.shape(1)); i++) {
     B(i, i) = i;
   }
-  for (int i = 0; i < std::min({C_ref.n_rows(), C_ref.n_rows(), A.n_cols()});
+  for (int i = 0; i < std::min({C_ref.shape(0), C_ref.shape(1), A.shape(1)});
        i++) {
     C_ref(i, i) = i * i;
   }
@@ -84,7 +67,10 @@ TEST(LinearAlgebra, MatrixMatrixMul)
 {
   const int m = 500, n = 500, k = 200;
 
-  matrix A(m, k), B(k, n), C(m, n), C_ref(m, n);
+  matrix A = xt::zeros<double>({m, k});
+  matrix B = xt::zeros<double>({k, n});
+  matrix C = xt::zeros<double>({m, n});
+  matrix C_ref = xt::zeros<double>({m, n});
 
   // build a test matrix
   setup_test_matrices(A, B, C_ref);
@@ -92,9 +78,8 @@ TEST(LinearAlgebra, MatrixMatrixMul)
   // calculate C = AB
   matrix_matrix_mul(A, B, C);
 
-  // printf("C = ");
-  // C.print();
+  // std::cout << " C = " << C << "\n";
 
   // the resulting vector for this test should equal our reference result
-  EXPECT_TRUE(C == C_ref);
+  EXPECT_EQ(C, C_ref);
 }

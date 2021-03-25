@@ -9,20 +9,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # If we knew GoogleTest is installed, we can just use the following single line
 find_package(GTest)
 
-# but if not, we'll fetch it ourselves
-if (NOT GTEST_FOUND)
-  include(FetchContent)
-  FetchContent_Declare(googletest
-    GIT_REPOSITORY    https://github.com/google/googletest.git
-    GIT_TAG           release-1.8.0
-    )
-  #FetchContent_MakeAvailable(googletest)
-  FetchContent_GetProperties(googletest)
-  if (NOT googletest_POPULATED)
-    FetchContent_Populate(googletest)
-    add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
-  endif()
-  
+include(cmake/CPM.cmake)
+CPMAddPackage(
+  NAME googletest
+  GITHUB_REPOSITORY google/googletest
+  GIT_TAG release-1.10.0
+  VERSION 1.10.0
+  OPTIONS
+      "INSTALL_GTEST OFF"
+      "gtest_force_shared_crt ON"
+)
+
+if (googletest_ADDED)
   add_library(GTest::GTest INTERFACE IMPORTED)
   target_include_directories(GTest::GTest INTERFACE "${googletest_SOURCE_DIR}/googletest/include")
   target_link_libraries(GTest::GTest INTERFACE gtest)
@@ -31,6 +29,20 @@ if (NOT GTEST_FOUND)
   target_link_libraries(GTest::Main INTERFACE gtest_main)
 endif()
 
+CPMAddPackage(
+  NAME xtl
+  GITHUB_REPOSITORY xtensor-stack/xtl
+  GIT_TAG 0.7.2
+  VERSION 0.7.2
+)
+
+CPMAddPackage(
+  NAME xtensor
+  GITHUB_REPOSITORY xtensor-stack/xtensor
+  GIT_TAG 0.23.4
+  VERSION 0.23.4
+)
+  
 enable_testing()
 
 add_subdirectory(c)
