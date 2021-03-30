@@ -64,7 +64,7 @@ static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
 
 TEST(LinearAlgebra, MatrixMatrixMul)
 {
-  const int m = 500, n = 500, k = 200;
+  const int m = 50, n = 50, k = 20;
 
   matrix A = xt::zeros<double>({m, k});
   matrix B = xt::zeros<double>({k, n});
