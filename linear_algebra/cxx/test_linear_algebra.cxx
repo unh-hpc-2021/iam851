@@ -32,9 +32,8 @@ TEST(LinearAlgebra, MatrixVectorMul)
   vector x = {1., 2., 3.};
   vector y_ref = {3., 4., 9.};
   matrix A = {{1., 1., 0.}, {0., 2., 0.}, {0., 0., 3.}};
-  vector y = xt::empty<double>({3});
 
-  matrix_vector_mul(A, x, y);
+  vector y = dot(A, x);
   EXPECT_EQ(y, y_ref);
   // std::cout << A << "\n";
 }
@@ -65,7 +64,7 @@ static void setup_test_matrices(matrix& A, matrix& B, matrix& C_ref)
 
 TEST(LinearAlgebra, MatrixMatrixMul)
 {
-  const int m = 500, n = 500, k = 200;
+  const int m = 50, n = 50, k = 20;
 
   matrix A = xt::zeros<double>({m, k});
   matrix B = xt::zeros<double>({k, n});

@@ -3,15 +3,17 @@
 
 #include <assert.h>
 
-void matrix_vector_mul(const matrix& A, const vector& x, vector& y)
+vector dot(const matrix& A, const vector& x)
 {
-  assert(A.shape(0) == y.size());
   assert(A.shape(1) == x.size());
 
+  vector y = xt::zeros<double>({A.shape(0)});
+
   for (int i = 0; i < y.size(); i++) {
-    y(i) = 0.;
     for (int j = 0; j < x.size(); j++) {
       y(i) += A(i, j) * x(j);
     }
   }
+
+  return y;
 }
