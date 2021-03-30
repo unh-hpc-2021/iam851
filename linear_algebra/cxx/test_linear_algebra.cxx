@@ -32,9 +32,8 @@ TEST(LinearAlgebra, MatrixVectorMul)
   vector x = {1., 2., 3.};
   vector y_ref = {3., 4., 9.};
   matrix A = {{1., 1., 0.}, {0., 2., 0.}, {0., 0., 3.}};
-  vector y = xt::empty<double>({3});
 
-  matrix_vector_mul(A, x, y);
+  vector y = dot(A, x);
   EXPECT_EQ(y, y_ref);
   // std::cout << A << "\n";
 }

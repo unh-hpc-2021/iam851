@@ -14,8 +14,8 @@ using vector = xt::xtensor<double, 1>;
 using matrix = xt::xtensor<double, 2>;
 
 double dot(const vector& x, const vector& y);
+vector dot(const matrix& A, const vector& x);
 
-void matrix_vector_mul(const matrix& A, const vector& x, vector& y);
 void matrix_matrix_mul(const matrix& A, const matrix& B, matrix& C);
 
 // ----------------------------------------------------------------------
