@@ -3,11 +3,9 @@
 
 int main(int argc, char** argv)
 {
-  vector x = {1., 2., 3.};
-  // clang-format off
-  matrix A = {{1., 2., 3.},
-      	      {3., 4., 5.}};
-  // clang-format on
+  const int N = 20000;
+  vector x = xt::arange(N);
+  matrix A = xt::eye(N);
 
   vector y = dot(A, x);
 }
