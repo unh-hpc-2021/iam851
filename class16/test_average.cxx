@@ -29,6 +29,7 @@ xt::xtensor<double, 1> avg(const xt::xtensor<double, 1>& f_nc)
 {
   auto f_cc = xt::empty<double>({N});
 
+#pragma omp parallel for
   for (int i = 0; i < N; i++) {
     f_cc(i) = .5 * (f_nc(i) + f_nc(i + 1));
   }
