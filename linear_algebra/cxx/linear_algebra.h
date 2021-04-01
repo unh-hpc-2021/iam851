@@ -19,6 +19,19 @@ vector dot(const matrix& A, const vector& x);
 void matrix_matrix_mul(const matrix& A, const matrix& B, matrix& C);
 
 // ----------------------------------------------------------------------
+// other useful stuff
+
+#include <sys/time.h>
+#include <stdlib.h>
+
+static inline double Wtime(void)
+{
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return tv.tv_sec + tv.tv_usec / 1e6;
+}
+
+// ----------------------------------------------------------------------
 
 #include <stdio.h>
 
