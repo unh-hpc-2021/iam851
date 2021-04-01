@@ -1,7 +1,7 @@
 
 cmake_minimum_required (VERSION 3.11)
 
-project(LinearAlgebra)
+project(LinearAlgebra LANGUAGES CXX Fortran)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -26,3 +26,5 @@ add_executable(test_integration test_integration.cxx)
 
 add_executable(test_average test_average.cxx)
 target_link_libraries(test_average xtensor)
+
+add_executable(test_average_fortran test_average_fortran.F90)
