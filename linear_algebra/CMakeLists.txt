@@ -6,9 +6,6 @@ project(LinearAlgebra)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# If we knew GoogleTest is installed, we can just use the following single line
-find_package(GTest)
-
 include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME googletest
