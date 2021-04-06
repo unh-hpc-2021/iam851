@@ -6,6 +6,8 @@ project(LinearAlgebra)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(GoogleTest)
+
 include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME googletest
