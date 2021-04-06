@@ -27,6 +27,9 @@ CPMAddPackage(
 add_executable(test_integration test_integration.cxx)
 target_link_libraries(test_integration OpenMP::OpenMP_CXX)
 
+add_executable(test_openmp test_openmp.cxx)
+target_link_libraries(test_openmp OpenMP::OpenMP_CXX)
+
 add_executable(test_average test_average.cxx)
 target_link_libraries(test_average xtensor)
 target_link_libraries(test_average OpenMP::OpenMP_CXX)
