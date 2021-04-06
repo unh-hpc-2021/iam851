@@ -16,6 +16,7 @@ int main(int argc, char** argv)
   double sum = 0.;
   double dx = 1. / N;
   double t1 = Wtime();
+#pragma omp parallel for
   for (int i = 0; i < N; i++) {
     sum += .5 * dx * (f(i * dx) + f((i + 1) * dx));
   }
