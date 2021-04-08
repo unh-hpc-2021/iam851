@@ -1,4 +1,6 @@
 
+#include "wtime.h"
+
 #include <xtensor/xio.hpp>
 #include <xtensor/xtensor.hpp>
 
@@ -8,7 +10,7 @@
 
 // ugh, global variables are ugly
 
-const size_t N = 50;
+const size_t N = 100000000;
 const double dx = 2. * M_PI / N;
 
 xt::xtensor<double, 1> make_func_nc()
@@ -27,6 +29,7 @@ xt::xtensor<double, 1> avg(const xt::xtensor<double, 1>& f_nc)
 {
   auto f_cc = xt::empty<double>({N});
 
+#pragma omp parallel for
   for (int i = 0; i < N; i++) {
     f_cc(i) = .5 * (f_nc(i) + f_nc(i + 1));
   }
@@ -53,8 +56,13 @@ void write_cc(const xt::xtensor<double, 1>& f, const std::string& filename)
 int main(int argc, char** argv)
 {
   auto f_nc = make_func_nc();
-  write_nc(f_nc, "f_nc.asc");
+  // write_nc(f_nc, "f_nc.asc");
 
-  auto f_cc = avg(f_nc);
-  write_cc(f_cc, "f_cc.asc");
+  for (int i = 0; i < 5; i++) {
+    double tb = Wtime();
+    auto f_cc = avg(f_nc);
+    double te = Wtime();
+    std::cout << "took " << te - tb << "\n";
+  }
+  // write_cc(f_cc, "f_cc.asc");
 }
