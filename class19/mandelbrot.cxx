@@ -1,8 +1,11 @@
 
+#include "wtime.h"
+
 #include <xtensor/xtensor.hpp>
 
 #include <complex>
 #include <cstdio>
+#include <iostream>
 
 static int calc_pixel(std::complex<double> c)
 {
@@ -34,12 +37,15 @@ int main(int argc, char** argv)
   double dx = std::real(z1 - z0) / (MX - 1);
   double dy = std::imag(z1 - z0) / (MY - 1);
 
+  double t_beg = Wtime();
   for (int iy = 0; iy < MY; iy++) {
     for (int ix = 0; ix < MX; ix++) {
       std::complex<double> c = z0 + dx * ix + dy * iy * 1i;
       data(ix, iy) = calc_pixel(c);
     }
   }
+  double t_end = Wtime();
+  std::cout << "took " << t_end - t_beg << "s\n";
 
   FILE* file = fopen("mandelbrot.asc", "w");
   for (int iy = 0; iy < MY; iy++) {
