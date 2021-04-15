@@ -38,6 +38,7 @@ int main(int argc, char** argv)
   double dy = std::imag(z1 - z0) / (MY - 1);
 
   double t_beg = Wtime();
+#pragma omp parallel for
   for (int iy = 0; iy < MY; iy++) {
     for (int ix = 0; ix < MX; ix++) {
       std::complex<double> c = z0 + dx * ix + dy * iy * 1i;
