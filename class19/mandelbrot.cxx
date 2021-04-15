@@ -29,7 +29,7 @@ int main(int argc, char** argv)
   const std::complex<double> z0 = -2. - 1.i;
   const std::complex<double> z1 = 1. + 1.i;
 
-  auto data = xt::empty<int>({MX, MY});
+  auto data = xt::empty<int, xt::layout_type::column_major>({MX, MY});
 
   double dx = std::real(z1 - z0) / (MX - 1);
   double dy = std::imag(z1 - z0) / (MY - 1);
