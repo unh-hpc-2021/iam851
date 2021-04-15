@@ -23,8 +23,8 @@ int main(int argc, char** argv)
 {
   using namespace std::complex_literals;
 
-  const int MX = 400;
-  const int MY = 400;
+  const int MX = 800;
+  const int MY = 800;
 
   const std::complex<double> z0 = -2. - 1.i;
   const std::complex<double> z1 = 1. + 1.i;
