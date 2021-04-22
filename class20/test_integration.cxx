@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "wtime.h"
+#include <mpi.h>
 
 double f(double x)
 {
@@ -15,12 +15,11 @@ int main(int argc, char** argv)
 
   double sum = 0.;
   double dx = 1. / N;
-  double t1 = Wtime();
-#pragma omp parallel for
+  double t1 = MPI_Wtime();
   for (int i = 0; i < N; i++) {
     sum += .5 * dx * (f(i * dx) + f((i + 1) * dx));
   }
-  double t2 = Wtime();
+  double t2 = MPI_Wtime();
   std::cout << "took " << t2 - t1 << " secs.\n";
   std::cout << "integral is approximately " << sum << "\n";
 
