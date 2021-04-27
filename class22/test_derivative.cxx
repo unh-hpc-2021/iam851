@@ -8,6 +8,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <cassert>
 
 xt::xtensor<double, 1> derivative(const xt::xtensor<double, 1>& f, double dx)
 {
@@ -41,9 +42,13 @@ int main(int argc, char** argv)
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+  assert(N % size == 0); // # grid points must be divisible by # procs
+  int n = N / size;
+
   // create coordinates [0, 2pi)
-  double dx = 2. * M_PI / N;
-  auto x = xt::arange<double>(0., 2. * M_PI, dx);
+  double L = 2. * M_PI; // total size of domain
+  double dx = L / N;
+  auto x = xt::arange<double>(rank * n, (rank + 1) * n) * dx;
 
   // our original function f
   auto f = sin(x);
