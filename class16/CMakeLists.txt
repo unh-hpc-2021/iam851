@@ -36,3 +36,6 @@ target_link_libraries(test_average OpenMP::OpenMP_CXX)
 
 add_executable(test_average_fortran test_average_fortran.F90)
 target_link_libraries(test_average_fortran OpenMP::OpenMP_Fortran)
+
+add_executable(test_message test_message.cxx)
+target_link_libraries(test_message OpenMP::OpenMP_CXX)
