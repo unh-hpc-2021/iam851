@@ -27,6 +27,11 @@ public:
   int n() const { return n_; }
   double dx() const { return dx_; }
 
+  auto coords() const
+  {
+    return xt::arange<double>(rank() * n(), (rank() + 1) * n()) * dx();
+  }
+
 private:
   MPI_Comm comm_;
   int rank_;
