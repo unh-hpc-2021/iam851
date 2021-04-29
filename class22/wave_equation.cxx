@@ -36,8 +36,8 @@ int main(int argc, char** argv)
     }
 
     // advance one timestep
-    auto k1 = derivative(u, domain.dx());
-    auto k2 = derivative(u + .5 * dt * k1, domain.dx());
+    auto k1 = derivative(domain, u);
+    auto k2 = derivative(domain, u + .5 * dt * k1);
     u += dt * k2;
   }
 

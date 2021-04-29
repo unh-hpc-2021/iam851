@@ -6,8 +6,6 @@
 
 #include <mpi.h>
 
-xt::xtensor<double, 1> derivative(const xt::xtensor<double, 1>& f, double dx);
-
 class mpi_domain
 {
 public:
@@ -38,5 +36,8 @@ private:
   double L_;
   double dx_;
 };
+
+xt::xtensor<double, 1> derivative(const mpi_domain& domain,
+                                  const xt::xtensor<double, 1>& f);
 
 #endif
