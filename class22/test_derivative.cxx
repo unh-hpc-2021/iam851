@@ -16,8 +16,21 @@ xt::xtensor<double, 1> derivative(const xt::xtensor<double, 1>& f, double dx)
 
   int n = f.shape(0);
   auto f_g = xt::pad(f, G);
-  f_g(G + -1) = f_g(G + n - 1);
-  f_g(G + n) = f_g(G + 0);
+
+  // fill ghosts
+  int rank, size;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+  int left = rank > 0 ? rank - 1 : size - 1;
+  int right = rank < size - 1 ? rank + 1 : 0;
+  MPI_Send(&f_g(G + 0), 1, MPI_DOUBLE, left, 123, MPI_COMM_WORLD);
+  MPI_Recv(&f_g(G + n), 1, MPI_DOUBLE, right, 123, MPI_COMM_WORLD,
+           MPI_STATUS_IGNORE);
+
+  MPI_Send(&f_g(G + n - 1), 1, MPI_DOUBLE, right, 456, MPI_COMM_WORLD);
+  MPI_Recv(&f_g(G + -1), 1, MPI_DOUBLE, left, 456, MPI_COMM_WORLD,
+           MPI_STATUS_IGNORE);
 
 #if 1
   auto fprime = xt::zeros_like(f);
