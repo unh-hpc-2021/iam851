@@ -40,8 +40,16 @@ public:
     const int G = 1;
     assert(f_g.shape(0) == n_ + 2 * G);
 
-    f_g(G + -1) = f_g(G + n_ - 1);
-    f_g(G + n_) = f_g(G + 0);
+    int rank_left = rank_ < size_ - 1 ? rank_ + 1 : 0;
+    int rank_right = rank_ > 0 ? rank_ - 1 : size_ - 1;
+
+    MPI_Send(&f_g(G + 0), 1, MPI_DOUBLE, rank_left, 123, comm());
+    MPI_Recv(&f_g(G + n_), 1, MPI_DOUBLE, rank_right, 123, comm(),
+             MPI_STATUS_IGNORE);
+
+    MPI_Send(&f_g(G + n_ - 1), 1, MPI_DOUBLE, rank_right, 456, comm());
+    MPI_Recv(&f_g(G + -1), 1, MPI_DOUBLE, rank_left, 456, comm(),
+             MPI_STATUS_IGNORE);
   }
 
 private:
