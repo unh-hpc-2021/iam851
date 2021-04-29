@@ -6,6 +6,8 @@
 
 #include <mpi.h>
 
+#include <cassert>
+
 class mpi_domain
 {
 public:
@@ -30,6 +32,16 @@ public:
   auto coords() const
   {
     return xt::arange<double>(rank() * n(), (rank() + 1) * n()) * dx();
+  }
+
+  void fill_ghosts(xt::xtensor<double, 1>& f_g) const
+  {
+    // assume f_g has exactly one ghost point
+    const int G = 1;
+    assert(f_g.shape(0) == n_ + 2 * G);
+
+    f_g(G + -1) = f_g(G + n_ - 1);
+    f_g(G + n_) = f_g(G + 0);
   }
 
 private:

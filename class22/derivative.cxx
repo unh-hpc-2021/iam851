@@ -8,13 +8,11 @@ xt::xtensor<double, 1> derivative(const mpi_domain& domain,
 {
   const int G = 1;
 
-  int n = domain.n();
   auto f_g = xt::pad(f, G);
-  f_g(G + -1) = f_g(G + n - 1);
-  f_g(G + n) = f_g(G + 0);
+  domain.fill_ghosts(f_g);
 
   auto fprime = xt::zeros_like(f);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < fprime.shape(0); i++) {
     fprime(i) = (f_g(i + G + 1) - f_g(i + G - 1)) / (2. * domain.dx());
   }
 
