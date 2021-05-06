@@ -20,15 +20,11 @@ int main(int argc, char** argv)
 
   const int N = 100000000;
 
-  int ib, ie;
-  assert(size == 2);
-  if (rank == 0) {
-    ib = 0;
-    ie = N / 2;
-  } else {
-    ib = N / 2;
-    ie = N;
-  }
+  assert(N % size == 0);
+  int n = N / size;
+  int ib = rank * n;
+  int ie = (rank + 1) * n;
+
   double sum = 0.;
   double dx = 1. / N;
   double t1 = MPI_Wtime();
