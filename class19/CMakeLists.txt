@@ -3,6 +3,8 @@ cmake_minimum_required (VERSION 3.9)
 
 project (Mandelbrot)
 
+find_package(OpenMP)
+
 find_package(xtl QUIET)
 if (NOT xtl_FOUND)
   include(FetchContent)
@@ -32,5 +34,8 @@ if (NOT xtensor_FOUND)
 endif()
   
 add_executable(mandelbrot mandelbrot.cxx)
+if (OpenMP_CXX_FOUND)
+  target_link_libraries(mandelbrot PRIVATE OpenMP::OpenMP_CXX)
+endif()
 target_link_libraries(mandelbrot PRIVATE xtensor)
 
