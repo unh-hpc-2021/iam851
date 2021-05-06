@@ -2,6 +2,7 @@
 #include "wtime.h"
 
 #include <xtensor/xtensor.hpp>
+#include <omp.h>
 
 #include <complex>
 #include <cstdio>
@@ -33,16 +34,18 @@ int main(int argc, char** argv)
   const std::complex<double> z1 = 1. + 1.i;
 
   auto data = xt::empty<int, xt::layout_type::column_major>({MX, MY});
+  auto thread = xt::empty<int, xt::layout_type::column_major>({MX, MY});
 
   double dx = std::real(z1 - z0) / (MX - 1);
   double dy = std::imag(z1 - z0) / (MY - 1);
 
   double t_beg = Wtime();
-#pragma omp parallel for
+#pragma omp parallel for schedule(runtime)
   for (int iy = 0; iy < MY; iy++) {
     for (int ix = 0; ix < MX; ix++) {
       std::complex<double> c = z0 + dx * ix + dy * iy * 1i;
       data(ix, iy) = calc_pixel(c);
+      thread(ix, iy) = omp_get_thread_num();
     }
   }
   double t_end = Wtime();
@@ -52,7 +55,8 @@ int main(int argc, char** argv)
   for (int iy = 0; iy < MY; iy++) {
     for (int ix = 0; ix < MX; ix++) {
       std::complex<double> c = z0 + dx * ix + dy * iy * 1i;
-      fprintf(file, "%g %g %d\n", std::real(c), std::imag(c), data(ix, iy));
+      fprintf(file, "%g %g %d %d\n", std::real(c), std::imag(c), data(ix, iy),
+              thread(ix, iy));
     }
     fprintf(file, "\n");
   }
