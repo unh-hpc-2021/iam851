@@ -37,18 +37,17 @@ public:
   void fill_ghosts(xt::xtensor<double, 1>& f_g) const
   {
     // assume f_g has exactly one ghost point
-    const int G = 1;
-    assert(f_g.shape(0) == n_ + 2 * G);
+    const int G = (f_g.shape(0) - n_) / 2;
 
     int rank_left = rank_ < size_ - 1 ? rank_ + 1 : 0;
     int rank_right = rank_ > 0 ? rank_ - 1 : size_ - 1;
 
-    MPI_Send(&f_g(G + 0), 1, MPI_DOUBLE, rank_left, 123, comm());
-    MPI_Recv(&f_g(G + n_), 1, MPI_DOUBLE, rank_right, 123, comm(),
+    MPI_Send(&f_g(G + 0), G, MPI_DOUBLE, rank_left, 123, comm());
+    MPI_Recv(&f_g(G + n_), G, MPI_DOUBLE, rank_right, 123, comm(),
              MPI_STATUS_IGNORE);
 
-    MPI_Send(&f_g(G + n_ - 1), 1, MPI_DOUBLE, rank_right, 456, comm());
-    MPI_Recv(&f_g(G + -1), 1, MPI_DOUBLE, rank_left, 456, comm(),
+    MPI_Send(&f_g(G + n_ - G), G, MPI_DOUBLE, rank_right, 456, comm());
+    MPI_Recv(&f_g(G + -G), G, MPI_DOUBLE, rank_left, 456, comm(),
              MPI_STATUS_IGNORE);
   }
 
