@@ -10,14 +10,20 @@
 xt::xtensor<double, 1> rhs(const mpi_domain& domain,
                            const xt::xtensor<double, 1>& u)
 {
-  const int G = 1;
+  const int G = 2;
 
   auto u_g = xt::pad(u, G);
   domain.fill_ghosts(u_g);
 
+  double dx3i = 1. / (2 * std::pow(domain.dx(), 3));
+  double dxi = 1. / (2. * domain.dx());
+
   auto rhs = xt::zeros_like(u);
   for (int i = 0; i < rhs.shape(0); i++) {
-    rhs(i) = (u_g(i + G + 1) - u_g(i + G - 1)) / (2. * domain.dx());
+    rhs(i) = (u_g(G + i + 2) - 2 * u_g(G + i + 1) + 2 * u_g(G + i - 1) -
+              u_g(G + i - 2)) *
+               dx3i -
+             6 * u_g(i + G) * (u_g(i + G + 1) - u_g(i + G - 1)) * dxi;
   }
 
   return rhs;
