@@ -32,6 +32,9 @@ add_executable(wave_equation wave_equation.cxx derivative.cxx)
 target_link_libraries(wave_equation
   PRIVATE MPI::MPI_CXX xtensor)
 
-  add_executable(mpi_dl_test mpi_dl_test.cxx)
+add_executable(kdv kdv.cxx derivative.cxx)
+  target_link_libraries(kdv PRIVATE MPI::MPI_CXX xtensor)
+
+add_executable(mpi_dl_test mpi_dl_test.cxx)
 target_link_libraries(mpi_dl_test
   PRIVATE MPI::MPI_CXX xtensor)
