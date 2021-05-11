@@ -31,10 +31,10 @@ xt::xtensor<double, 1> rhs(const mpi_domain& domain,
 
 int main(int argc, char** argv)
 {
-  const int N = 16;           // number of grid points
+  const int N = 128;          // number of grid points
   const double L = 2. * M_PI; // total size of domain
-  const int n_timesteps = 100;
-  const int output_every = 1;
+  const int n_timesteps = 100000;
+  const int output_every = 1000;
 
   MPI_Init(&argc, &argv);
   mpi_domain domain(MPI_COMM_WORLD, N, L);
@@ -42,15 +42,24 @@ int main(int argc, char** argv)
   // create coordinates [0, 2pi)
   auto x = domain.coords();
 
-  // our initial condition
+// our initial condition
+#if 1
   xt::xtensor<double, 1> u = sin(x);
+#else
+  double c = 3.;
+  xt::xtensor<double, 1> u =
+    -.5 * c / xt::pow(xt::cosh(.5 * std::sqrt(c) * (x - M_PI)), 2);
+#endif
 
-  double dt = domain.dx();
+  // a very stringent CLF condition
+  double dt = .1 * std::pow(domain.dx(), 3);
+
   for (int n = 0; n < n_timesteps; n++) {
     if (n % output_every == 0) {
       std::ofstream out("u-" + std::to_string(n) + "-" +
                         std::to_string(domain.rank()) + ".csv");
       xt::dump_csv(out, xt::stack(xt::xtuple(x, u), 1));
+      std::cout << "writing output " << n << "\n";
     }
 
     // advance one timestep
